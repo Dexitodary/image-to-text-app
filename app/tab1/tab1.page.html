@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title class="center-title">
+      IMAGE TO TEXT APP - Vachl
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="button-container">
+    <ion-button class="scan-button" expand="block" (click)="scanNow()">
+      Scan Image
+    </ion-button>
+  </div>
+
+  <ion-list>
+    <ion-item *ngFor="let item of textDetections">
+      <ion-label>{{ item.text }}</ion-label>
+      <ion-button fill="clear" slot="end" (click)="copyToClipboard(item.text)">
+        Copy
+      </ion-button>
+    </ion-item>
+  </ion-list>
+</ion-content>

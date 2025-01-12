@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title class="center-title">
+      HISTORY
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="button-container">
+    <ion-button class="clear-button" expand="block" (click)="clearHistory()">
+      Clear History
+    </ion-button>
+  </div>
+
+  <ion-list>
+    <ion-item *ngFor="let text of scannedTextsHistory">
+      <ion-label>{{ text }}</ion-label>
+      <ion-button fill="clear" slot="end" (click)="copyToClipboard(text)">
+        Copy
+      </ion-button>
+    </ion-item>
+  </ion-list>
+</ion-content>

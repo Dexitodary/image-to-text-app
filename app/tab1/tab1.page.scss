@@ -1,0 +1,31 @@
+ion-content {
+    --background: #292929;
+}
+  
+.button-container {
+    position: fixed;
+    bottom: 20px;
+    width: 100%;
+    padding: 0 20px;
+    z-index: 10;
+}
+
+.scan-button
+{
+    --border-radius: 20px;
+    font-weight: bold;
+    text-align: center;
+    height: 50px;
+    --background: #3880ff;
+}
+
+.center-title
+{
+    color: #3880ff;
+    text-align: center;
+    font-weight: bold;
+}
+  
+ion-list {
+    margin-bottom: 100px;
+}
