@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HistoryService } from '../services/history.service';
 import { CommonModule } from '@angular/common';
+import { AlertController } from '@ionic/angular';
 import {
     IonHeader,
     IonToolbar,
@@ -31,16 +32,15 @@ import {
 export class Tab2Page implements OnInit {
   scannedTextsHistory: string[] = [];
 
-  constructor(private historyService: HistoryService) {}
+  constructor(
+    private historyService: HistoryService,
+    private alertController: AlertController
+  ) {}
 
   ngOnInit() {
     this.historyService.history$.subscribe(history => {
       this.scannedTextsHistory = history;
     });
-  }
-
-  async clearHistory() {
-    await this.historyService.clearHistory();
   }
 
   async copyToClipboard(text: string) {
@@ -51,4 +51,36 @@ export class Tab2Page implements OnInit {
       console.error('Failed to copy text: ', err);
     }
   }
+
+  async confirmClearHistory() {
+    const alert = await this.alertController.create({
+      header: 'Confirm Clear History',
+      message: 'Are you sure you want to clear the scanned texts history?',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () => {
+            console.log('Clear history cancelled');
+          }
+        },
+        {
+          text: 'Clear',
+          role: 'destructive',
+          handler: async () => {
+            await this.historyService.clearHistory();
+            console.log('History cleared');
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+
+  async deleteItem(index: number) {
+    const updatedHistory = this.scannedTextsHistory.slice();
+    updatedHistory.splice(index, 1);
+    await this.historyService.updateHistory(updatedHistory);
+  } 
 }

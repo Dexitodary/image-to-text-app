@@ -12,7 +12,7 @@ ion-content {
 
 .clear-button
 {
-    --border-radius: 20px;
+    --border-radius: 20px !important; 
     font-weight: bold;
     text-align: center;
     height: 50px;
